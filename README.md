@@ -185,7 +185,7 @@ None. Initial shim creation and review submission
 *******************************************************************************
 ### How do you manage and protect the keys used in your SHIM?
 *******************************************************************************
-[your text here]
+Certificate is stored in a hardware token with restricted access to the token
 
 *******************************************************************************
 ### Do you use EV certificates as embedded certificates in the SHIM?
