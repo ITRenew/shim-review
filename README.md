@@ -46,9 +46,9 @@ An authorized reviewer will initiate contact verification by sending each securi
 You will be asked to post the contents of these mails in your `shim-review` issue to prove ownership of the email addresses and PGP keys.
 *******************************************************************************
 - Name:David Friedman
-- Position:
+- Position: Senior Manager, IT
 - Email address:david.friedman@ironmountain.com
-- PGP key fingerprint:
+- PGP key fingerprint: B2C6438FFDE5A3AAFB8CE3BEA3CD579F25D41BC3
 
 (Key should be signed by the other security contacts, pushed to a keyserver
 like keyserver.ubuntu.com, and preferably have signatures that are reasonably
@@ -60,7 +60,7 @@ well known in the Linux community.)
 - Name:Keith LoPresto
 - Position:Software Development Manager
 - Email address:keithd.lopresto@ironmountain.com
-- PGP key fingerprint:
+- PGP key fingerprint: 85F2F52063ABD45CF77E75D4A9FA571827D09E89
 
 (Key should be signed by the other security contacts, pushed to a keyserver
 like keyserver.ubuntu.com, and preferably have signatures that are reasonably
@@ -79,7 +79,7 @@ yes
 ### URL for a repo that contains the exact code which was built to get this binary:
 *******************************************************************************
 
-
+VLAD to answer.  Assuming the above github.com/rhboot/shim  URI
 
 *******************************************************************************
 ### What patches are being applied and why:
