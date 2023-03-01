@@ -211,16 +211,17 @@ Yes. 3 years validity EV certificate issued by Sectigo Limited.
 ### Where your code is only slightly modified from an upstream vendor's, please also preserve their SBAT entries to simplify revocation.
 *******************************************************************************
 SHIM:
-
+```
 sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
 shim,3,UEFI shim,shim,1,https://github.com/rhboot/shim
 shim.itrenew,1,ITrenew Inc.,shim,15.7,mail:security@itrenew.com
-
+```
 GRUB2:
-
+```
 sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
 grub,3,Free Software Foundation,grub,2.06,https//www.gnu.org/software/grub/
 grub.itrenew,1,ITrenew Inc.,grub2,2.06-65bc4596,mail:security@itrenew.com
+```
 
 *******************************************************************************
 ### Which modules are built into your signed grub image?
