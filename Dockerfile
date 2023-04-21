@@ -13,6 +13,11 @@ WORKDIR /build/shim
 
 COPY itrenew-ev.cer /build/shim
 COPY sbat.csv /build/shim/data
+COPY sbat_var.S.patch /build/shim
+
+# Apply the patch 'Make sbat_var.S parse right with buggy gcc/binutils' 
+# from the commit 657b2483ca6e9fcf2ad8ac7ee577ff546d24c3aa
+RUN patch -Np1 -i sbat_var.S.patch
 
 RUN mkdir -p build-x86_64/data build-ia32/data
 RUN cp /build/shim/data/sbat.csv build-x86_64/data && \
@@ -37,6 +42,8 @@ RUN objcopy -j .sbat -O binary /build/target/shimx64.efi shimx64.sbat && \
     objcopy -j .sbat -O binary /build/target/shimia32.efi shimia32.sbat
 RUN cat shimx64.sbat 
 RUN cat shimia32.sbat
+RUN objdump -s -j .sbatlevel /build/target/shimx64.efi && \
+    objdump -s -j .sbatlevel /build/target/shimia32.efi
 RUN diff shimx64.sbat /build/shim/data/sbat.csv && \
     diff shimia32.sbat /build/shim/data/sbat.csv || ( >&2 echo "Bad SBAT"; exit 1 )
 
