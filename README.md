@@ -84,12 +84,15 @@ yes
 ### URL for a repo that contains the exact code which was built to get this binary:
 *******************************************************************************
 
-https://github.com/ITRenew/shim-review/
+https://github.com/rhboot/shim/releases/tag/15.7
 
 *******************************************************************************
 ### What patches are being applied and why:
 *******************************************************************************
-None
+'Make sbat_var.S parse right with buggy gcc/binutils #535' patch has been applied from the commit: https://github.com/rhboot/shim/commit/657b2483ca6e9fcf2ad8ac7ee577ff546d24c3aa
+
+We applied this patch because our build system is based on Debian 11 and this OS uses binutils version 2.35.2. 
+Versions prior to 2.36 result in a problem in generating .sbatlevel section.
 
 *******************************************************************************
 ### If shim is loading GRUB2 bootloader what exact implementation of Secureboot in GRUB2 do you have? (Either Upstream GRUB2 shim_lock verifier or Downstream RHEL/Fedora/Debian/Canonical-like implementation)
@@ -192,8 +195,8 @@ None. Initial shim creation and review submission
 *******************************************************************************
 ### What is the SHA256 hash of your final SHIM binary?
 *******************************************************************************
-a227d70c0f8273ee399025e42c9276243d76d1dc2493042a6cfe7ade763b5b0f  shimx64.efi
-56359f37e20b75f23911e890dc167e4278538e7a3a008b15e07b96a74182d857  shimia32.efi
+13fd404bea0193501b2878d85377529a2d1b2a01d5e9b831749ecf732110ee09  shimx64.efi
+50e655bbce496836545c6dd4ccf9fa36caba3e66193987e09b440aea0531703d  shimia32.efi
 
 *******************************************************************************
 ### How do you manage and protect the keys used in your SHIM?
