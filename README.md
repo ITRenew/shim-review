@@ -195,8 +195,8 @@ None. Initial shim creation and review submission
 *******************************************************************************
 ### What is the SHA256 hash of your final SHIM binary?
 *******************************************************************************
-13fd404bea0193501b2878d85377529a2d1b2a01d5e9b831749ecf732110ee09  shimx64.efi
-50e655bbce496836545c6dd4ccf9fa36caba3e66193987e09b440aea0531703d  shimia32.efi
+0609f3c1557699c5d22d6c9b3275c1d548f9eb15418bee2e0b7e660e794801ea  shimx64.efi
+d286d48415259e769671b96fb807a10e3a1e918b2f8757bf871ff474c8ee39e8  shimia32.efi
 
 *******************************************************************************
 ### How do you manage and protect the keys used in your SHIM?
