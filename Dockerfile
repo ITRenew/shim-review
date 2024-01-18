@@ -28,9 +28,10 @@ RUN make -C build-x86_64 ARCH=x86_64 VENDOR_CERT_FILE=/build/shim/itrenew-ev.cer
 # Build for ia32 arch
 RUN make -C build-ia32 ARCH=ia32 VENDOR_CERT_FILE=/build/shim/itrenew-ev.cer TOPDIR=.. -f ../Makefile
 
-# Enable NX compatibility flag as required by https://github.com/rhboot/shim-review/issues/307
-RUN ./build-x86_64/post-process-pe -vv -n build-x86_64/shimx64.efi
-RUN ./build-ia32/post-process-pe -vv -n build-ia32/shimia32.efi
+### Enable NX compatibility flag as required by https://github.com/rhboot/shim-review/issues/307
+### Update: Temporary disabled setting of NX compatibility flag due to changed requirements. 
+# RUN ./build-x86_64/post-process-pe -vv -n build-x86_64/shimx64.efi
+# RUN ./build-ia32/post-process-pe -vv -n build-ia32/shimia32.efi
 
 # Copy binary targets
 RUN mkdir /build/target/
