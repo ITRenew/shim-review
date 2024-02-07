@@ -72,10 +72,10 @@ like keyserver.ubuntu.com, and preferably have signatures that are reasonably
 well known in the Linux community.)
 
 *******************************************************************************
-### Were these binaries created from the 15.7 shim release tar?
-Please create your shim binaries starting with the 15.7 shim release tar file: https://github.com/rhboot/shim/releases/download/15.7/shim-15.7.tar.bz2
+### Were these binaries created from the 15.8 shim release tar?
+Please create your shim binaries starting with the 15.8 shim release tar file: https://github.com/rhboot/shim/releases/download/15.8/shim-15.8.tar.bz2
 
-This matches https://github.com/rhboot/shim/releases/tag/15.7 and contains the appropriate gnu-efi source.
+This matches https://github.com/rhboot/shim/releases/tag/15.8 and contains the appropriate gnu-efi source.
 
 *******************************************************************************
 yes
@@ -84,15 +84,21 @@ yes
 ### URL for a repo that contains the exact code which was built to get this binary:
 *******************************************************************************
 
-https://github.com/rhboot/shim/releases/tag/15.7
+https://github.com/rhboot/shim/releases/tag/15.8
 
 *******************************************************************************
 ### What patches are being applied and why:
 *******************************************************************************
-'Make sbat_var.S parse right with buggy gcc/binutils #535' patch has been applied from the commit: https://github.com/rhboot/shim/commit/657b2483ca6e9fcf2ad8ac7ee577ff546d24c3aa
 
-We applied this patch because our build system is based on Debian 11 and this OS uses binutils version 2.35.2. 
-Versions prior to 2.36 result in a problem in generating .sbatlevel section.
+None
+
+*******************************************************************************
+### Do you have the NX bit set in your shim? If so, is your entire boot stack NX-compatible and what testing have you done to ensure such compatibility?
+See https://techcommunity.microsoft.com/t5/hardware-dev-center/nx-exception-for-shim-community/ba-p/3976522 for more details on the signing of shim without NX bit.
+
+*******************************************************************************
+
+No, NX bit is disabled due to the non fully NX-compatible boot stack.
 
 *******************************************************************************
 ### If shim is loading GRUB2 bootloader what exact implementation of Secureboot in GRUB2 do you have? (Either Upstream GRUB2 shim_lock verifier or Downstream RHEL/Fedora/Debian/Canonical-like implementation)
@@ -100,39 +106,52 @@ Versions prior to 2.36 result in a problem in generating .sbatlevel section.
 We use the upstream GRUB2 shim_lock verifier.
 
 *******************************************************************************
-### If shim is loading GRUB2 bootloader and your previously released shim booted a version of grub affected by any of the CVEs in the July 2020 grub2 CVE list, the March 2021 grub2 CVE list, the June 7th 2022 grub2 CVE list, or the November 15th 2022 list, have fixes for all these CVEs been applied?
+### If shim is loading GRUB2 bootloader and your previously released shim booted a version of GRUB2 affected by any of the CVEs in the July 2020, the March 2021, the June 7th 2022, the November 15th 2022, or 3rd of October 2023 GRUB2 CVE list, have fixes for all these CVEs been applied?
 
-* CVE-2020-14372
-* CVE-2020-25632
-* CVE-2020-25647
-* CVE-2020-27749
-* CVE-2020-27779
-* CVE-2021-20225
-* CVE-2021-20233
-* CVE-2020-10713
-* CVE-2020-14308
-* CVE-2020-14309
-* CVE-2020-14310
-* CVE-2020-14311
-* CVE-2020-15705
-* CVE-2021-3418 (if you are shipping the shim_lock module)
-
-* CVE-2021-3695
-* CVE-2021-3696
-* CVE-2021-3697
-* CVE-2022-28733
-* CVE-2022-28734
-* CVE-2022-28735
-* CVE-2022-28736
-* CVE-2022-28737
-
-* CVE-2022-2601
-* CVE-2022-3775
+* 2020 July - BootHole
+  * Details: https://lists.gnu.org/archive/html/grub-devel/2020-07/msg00034.html
+  * CVE-2020-10713
+  * CVE-2020-14308
+  * CVE-2020-14309
+  * CVE-2020-14310
+  * CVE-2020-14311
+  * CVE-2020-15705
+  * CVE-2020-15706
+  * CVE-2020-15707
+* March 2021
+  * Details: https://lists.gnu.org/archive/html/grub-devel/2021-03/msg00007.html
+  * CVE-2020-14372
+  * CVE-2020-25632
+  * CVE-2020-25647
+  * CVE-2020-27749
+  * CVE-2020-27779
+  * CVE-2021-3418 (if you are shipping the shim_lock module)
+  * CVE-2021-20225
+  * CVE-2021-20233
+* June 2022
+  * Details: https://lists.gnu.org/archive/html/grub-devel/2022-06/msg00035.html, SBAT increase to 2
+  * CVE-2021-3695
+  * CVE-2021-3696
+  * CVE-2021-3697
+  * CVE-2022-28733
+  * CVE-2022-28734
+  * CVE-2022-28735
+  * CVE-2022-28736
+  * CVE-2022-28737
+* November 2022
+  * Details: https://lists.gnu.org/archive/html/grub-devel/2022-11/msg00059.html, SBAT increase to 3
+  * CVE-2022-2601
+  * CVE-2022-3775
+* October 2023 - NTFS vulnerabilities
+  * Details: https://lists.gnu.org/archive/html/grub-devel/2023-10/msg00028.html, SBAT increase to 4
+  * CVE-2023-4693
+  * CVE-2023-4692
 *******************************************************************************
 Yes
 
 *******************************************************************************
-### If these fixes have been applied, have you set the global SBAT generation on your GRUB binary to 3?
+### If shim is loading GRUB2 bootloader, and if these fixes have been applied, is the upstream global SBAT generation in your GRUB2 binary set to 4?
+The entry should look similar to: `grub,4,Free Software Foundation,grub,GRUB_UPSTREAM_VERSION,https://www.gnu.org/software/grub/`
 *******************************************************************************
 Yes
 
@@ -140,7 +159,8 @@ Yes
 ### Were old shims hashes provided to Microsoft for verification and to be added to future DBX updates?
 ### Does your new chain of trust disallow booting old GRUB2 builds affected by the CVEs?
 *******************************************************************************
-No previous shim existed for the Teraware product.  This is a new shim submission.
+Previous SHIM 15.7 submission was accepted by review team, but is not signed by Microsoft.
+We decided to update submission to SHIM version 15.8.
 
 *******************************************************************************
 ### If your boot chain of trust includes a Linux kernel:
@@ -156,6 +176,12 @@ Yes, all these have been applied.
 Yes. Local patches has been applied to storage drivers: aacraid, megaraid_sas, smartpqi, nvme-core, hpsa.
 These patches resolves performance and storage device compatibility problems using low-level access to storage devices and disk drives.
 These patches don't exist in the upstream kernel.
+
+*******************************************************************************
+### Do you use an ephemeral key for signing kernel modules?
+### If not, please describe how you ensure that one kernel build does not load modules built for another kernel.
+*******************************************************************************
+Yes, we implemented ephemeral key for signing kernel modules with this updated submission.
 
 *******************************************************************************
 ### If you use vendor_db functionality of providing multiple certificates and/or hashes please briefly describe your certificate setup.
@@ -195,8 +221,9 @@ None. Initial shim creation and review submission
 *******************************************************************************
 ### What is the SHA256 hash of your final SHIM binary?
 *******************************************************************************
-092498ad40bf7da13f72a4649e1c41abf45a76659a8a825e23e1594df7030425  shimx64.efi
-150eda5b87d49c41267b75d5932a18a1c72e736bd009e00a6ca37ffe9e3f8e55  shimia32.efi
+5d94c41b58a14aa5ef9a473db8c3942ca5665e00753bdd41f69ba7bf12cb02a4  shimx64.efi
+aad7f2f918a105ca4b62dbfe8ad4eee0e62c2fa155b928d6e5c85d2a2655a074  shimia32.efi
+956d16026b648a992dd9f155436caa4e7b4f125f1d7c28efb37cdb89689b8ff3  shimaa64.efi
 
 *******************************************************************************
 ### How do you manage and protect the keys used in your SHIM?
@@ -216,18 +243,18 @@ Yes. 3 years validity EV certificate issued by Sectigo Limited.
 SHIM:
 ```
 sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
-shim,3,UEFI shim,shim,1,https://github.com/rhboot/shim
-shim.itrenew,1,ITrenew Inc.,shim,15.7,mail:security@itrenew.com
+shim,4,UEFI shim,shim,1,https://github.com/rhboot/shim
+shim.itrenew,1,ITrenew Inc.,shim,15.8,mail:security@itrenew.com
 ```
 GRUB2:
 ```
 sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
-grub,3,Free Software Foundation,grub,2.06,https//www.gnu.org/software/grub/
-grub.itrenew,1,ITrenew Inc.,grub2,2.06-65bc4596,mail:security@itrenew.com
+grub,4,Free Software Foundation,grub,2.12,https//www.gnu.org/software/grub/
+grub.itrenew,1,ITrenew Inc.,grub2,2.12-5ca9db22e,mail:security@itrenew.com
 ```
 
 *******************************************************************************
-### Which modules are built into your signed grub image?
+### If shim is loading GRUB2 bootloader, which modules are built into your signed GRUB2 image?
 *******************************************************************************
 all_video boot chain configfile echo ext2 exfat fat font
 gfxmenu gfxterm gfxterm_background
@@ -238,12 +265,18 @@ search search_fs_file search_fs_uuid search_label test
 tpm true video xfs
 
 *******************************************************************************
-### What is the origin and full version number of your bootloader (GRUB or other)?
+### If you are using systemd-boot on arm64 or riscv, is the fix for [unverified Devicetree Blob loading](https://github.com/systemd/systemd/security/advisories/GHSA-6m6p-rjcq-334c) included?
+*******************************************************************************
+Do not use systemd-boot
+
+*******************************************************************************
+### What is the origin and full version number of your bootloader (GRUB2 or systemd-boot or other)?
 *******************************************************************************
 We use upstream GRUB2 bootloader from:
 https://git.savannah.gnu.org/git/grub.git
 
-Commit: 65bc45963014773e2062ccc63ff34a089d2e352e
+Release Version 2.12
+Commit: 5ca9db22e8ed0dbebb2aec53722972de0680a463
 
 *******************************************************************************
 ### If your SHIM launches any other components, please provide further details on what is launched.
